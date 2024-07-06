@@ -1,22 +1,15 @@
 import express from 'express';
 import AdminJS from 'adminjs';
-import { buildAuthenticatedRouter, buildRouter } from '@adminjs/express';
+import { buildRouter } from '@adminjs/express';
 
-import provider from './admin/auth-provider.js';
 import options from './admin/options.js';
-import initializeDb from './db/index.js';
-import { Components } from './admin/component-loader.js';
-import { ApiDatabase } from './resources/api/api.database.js';
-import { ApiResource } from './resources/api/api.resource.js';
-
-AdminJS.registerAdapter({ Database: ApiDatabase, Resource: ApiResource });
 
 const port = process.env.PORT || 3000;
 
 const start = async () => {
   const app = express();
 
-  await initializeDb();
+  // await initializeDb();
 
   const admin = new AdminJS(options);
 
@@ -25,24 +18,6 @@ const start = async () => {
   } else {
     admin.watch();
   }
-
-  // const router = buildAuthenticatedRouter(
-  //   admin,
-  //   {
-  //     cookiePassword: process.env.COOKIE_SECRET,
-  //     cookieName: 'dgo-admin',
-  //     provider,
-  //   },
-  //   null,
-  //   {
-  //     secret: process.env.COOKIE_SECRET,
-  //     saveUninitialized: true,
-  //     resave: true,
-  //     cookie: {
-  //       maxAge: 1000 * 60 * 60,
-  //     }
-  //   },
-  // );
 
   const router = buildRouter(admin)
   app.use(admin.options.rootPath, router);

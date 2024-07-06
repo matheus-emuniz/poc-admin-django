@@ -1,15 +1,15 @@
 import { AdminJSOptions } from 'adminjs';
 
 import { componentLoader, Components } from './component-loader.js';
-import { ApiResource } from '../resources/api/api.resource.js';
+import { ApiBaseResource } from '../app/api/api.base.resource.js';
+import { DjangoDatabase } from '../app/django/django.database.js';
 
 const options: AdminJSOptions = {
   componentLoader,
   rootPath: '/admin',
-  resources: [
-    new ApiResource('posts')
+  databases: [
+    new DjangoDatabase(),
   ],
-  databases: [],
   dashboard: {
     component: Components.Dashboard,
   },
