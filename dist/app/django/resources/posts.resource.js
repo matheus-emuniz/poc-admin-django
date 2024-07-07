@@ -1,9 +1,14 @@
 import { ApiBaseProperty } from '../../api/api.base.property.js';
 import { DjangoBaseResource } from '../django.database.js';
-export const postsResource = (api) => new DjangoBaseResource({
+export const createPostsResource = (api, databaseName) => new DjangoBaseResource({
     api,
     id: 'Posts',
-    databaseName: 'Django',
-    properties: [],
+    model: 'posts',
+    databaseName: databaseName,
+    properties: [
+        new ApiBaseProperty({ path: 'id', isId: true }),
+        new ApiBaseProperty({ path: 'title' }),
+        new ApiBaseProperty({ path: 'body' }),
+    ],
 });
-export default postsResource;
+export default createPostsResource;
