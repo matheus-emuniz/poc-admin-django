@@ -9,8 +9,6 @@ const port = process.env.PORT || 3000;
 const start = async () => {
   const app = express();
 
-  // await initializeDb();
-
   const admin = new AdminJS(options);
 
   if (process.env.NODE_ENV === 'production') {

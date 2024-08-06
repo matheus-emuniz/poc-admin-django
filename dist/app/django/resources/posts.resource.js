@@ -1,5 +1,5 @@
 import { ApiBaseProperty } from '../../api/api.base.property.js';
-import { DjangoBaseResource } from '../django.database.js';
+import { DjangoBaseResource } from '../django.resource.js';
 export const createPostsResource = (api, databaseName) => new DjangoBaseResource({
     api,
     id: 'Posts',
